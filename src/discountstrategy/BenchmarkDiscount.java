@@ -1,6 +1,7 @@
 package discountstrategy;
 
 public class BenchmarkDiscount implements Discount{
+    private double totalAmount;
 
     @Override
     public double calculateDiscount() {

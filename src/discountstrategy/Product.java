@@ -4,11 +4,13 @@ public class Product {
     private String productId;
     private String productName;
     private double price;
+    private Discount discount;
     
-    public Product(String productId, String productName, double price){
-        setProductId(productId);
-        setProductName(productName);
-        setPrice(price);
+    public Product(String productId, String productName, double price, Discount discount){
+        this.setProductId(productId);
+        this.setProductName(productName);
+        this.setPrice(price);
+        this.setDiscount(discount);
     }
 
     public final String getProductId() {
@@ -16,7 +18,11 @@ public class Product {
     }
 
     public final void setProductId(String productId) {
-        this.productId = productId;
+        if(productId == null || productId.isEmpty() || productId.length() < 2){
+            throw new IllegalArgumentException("Input is not valid.");
+        }else{
+            this.productId = productId;
+        }
     }
 
     public final String getProductName() {
@@ -24,7 +30,11 @@ public class Product {
     }
 
     public final void setProductName(String productName) {
-        this.productName = productName;
+        if(productName == null || productName.isEmpty() || productName.length() < 2){
+            throw new IllegalArgumentException("Input is not valid.");
+        }else{
+            this.productName = productName;
+        }
     }
 
     public final double getPrice() {
@@ -32,6 +42,22 @@ public class Product {
     }
 
     public final void setPrice(double price) {
-        this.price = price;
+        if(price < 0){
+            throw new IllegalArgumentException("Input is not valid.");
+        }else{
+            this.price = price;
+        }
+    }
+
+    public final Discount getDiscount() {
+        return discount;
+    }
+
+    public final void setDiscount(Discount discount) {
+        if(discount == null){
+            throw new IllegalArgumentException("Input is not valid.");
+        }else{
+            this.discount = discount;
+        }
     }
 }
