@@ -1,19 +1,20 @@
 package discountstrategy;
 
-public class QuantityDiscount implements Discount{
+public class QuantityDiscount implements Discount {
     private double percent;
-    private int quantity;
+    private int minQty;
 
-    QuantityDiscount(double percent, int quantity) {
+
+    public QuantityDiscount(double percent, int minQty) {
         setPercent(percent);
-        setQuantity(quantity);
+        setMinQty(minQty);
     }
     
     @Override
-    public final double calculateDiscount() {
+    public final double calculateDiscount(int qty, double price) {
         double discount = 0;
-        if(quantity >= 5){
-            discount = percent;
+        if(qty >= minQty){
+            discount = price * qty * percent;
         }
         return discount;
     }
@@ -30,15 +31,13 @@ public class QuantityDiscount implements Discount{
         }
     }
 
-    public int getQuantity() {
-        return quantity;
+    public int getMinQty() {
+        return minQty;
     }
 
-    public void setQuantity(int quantity) {
-        if(quantity < 0){
-            throw new IllegalArgumentException("Input is not valid.");
-        }else{
-            this.quantity = quantity;
-        }
+    public void setMinQty(int minQty) {
+        this.minQty = minQty;
     }
+
+   
 }

@@ -1,5 +1,5 @@
 package discountstrategy;
 
-interface Discount {
-    public abstract double calculateDiscount();
+public interface Discount {
+    public abstract double calculateDiscount(int qty, double price);
 }

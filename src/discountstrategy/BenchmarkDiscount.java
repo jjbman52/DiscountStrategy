@@ -1,19 +1,52 @@
 package discountstrategy;
 
 public class BenchmarkDiscount implements Discount{
-    private double totalAmount;
+    private double discountAmt;
+    private double minAmtPurchased;
+    private double maxAmtPurchased;
+    
+    public BenchmarkDiscount(double discountAmt, double minAmtPurchased, double maxAmtPurchased){
+        setDiscountAmt(discountAmt);
+        setMinAmtPurchased(minAmtPurchased);
+        setMaxAmtPurchased(maxAmtPurchased);
+    }
 
     @Override
-    public double calculateDiscount() {
+    public double calculateDiscount(int qty, double price) {
         double discount = 0;
-        if(totalAmount > 100 && totalAmount <= 150){
-            discount = 10;
-        } else if(totalAmount > 150 && totalAmount <= 200){
-            discount = 25;
-        } else if(totalAmount > 200){
-            discount = 50;
+        
+        double subtotalBeforeDiscount = price * qty;
+        if(subtotalBeforeDiscount >= minAmtPurchased && subtotalBeforeDiscount <= maxAmtPurchased) {
+            discount = discountAmt;
         }
         return discount;
     }
-    
+
+    public double getDiscountAmt() {
+        return discountAmt;
+    }
+
+    public final void setDiscountAmt(double discountAmt) {
+        if(discountAmt < 0){
+            throw new IllegalArgumentException("Input is not valid.");
+        }else{
+            this.discountAmt = discountAmt;
+        }
+    }
+
+    public final double getMinAmtPurchased() {
+        return minAmtPurchased;
+    }
+
+    public final void setMinAmtPurchased(double minAmtPurchased) {
+        this.minAmtPurchased = minAmtPurchased;
+    }
+
+    public final double getMaxAmtPurchased() {
+        return maxAmtPurchased;
+    }
+
+    public final void setMaxAmtPurchased(double maxAmtPurchased) {
+        this.maxAmtPurchased = maxAmtPurchased;
+    }
 }

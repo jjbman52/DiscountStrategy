@@ -8,8 +8,8 @@ public class PercentOffDiscount implements Discount{
     }
 
     @Override
-    public final double calculateDiscount() {
-        return percent;
+    public final double calculateDiscount(int qty, double price) {
+        return price * qty * percent;
     }
 
     public final double getPercent() {

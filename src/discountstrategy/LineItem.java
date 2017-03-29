@@ -17,7 +17,7 @@ public class LineItem {
         String line;
         
         line =
-        getProduct().getProductName() + "    " + getProduct().getProductId();
+        getProduct().getProductName() + "    " + getProduct().getProductId() + "    " + getProduct().getPrice() + "    " + getDiscountAmount();
         
         return line;
     }
@@ -35,12 +35,12 @@ public class LineItem {
     }
     
     public final double getDiscountAmount(){
-        double discount;
-        discount = getProduct().getDiscount().calculateDiscount();
-        return discount;
+        double discountAmount;
+        discountAmount = getProduct().getDiscount().calculateDiscount(quantity,product.getPrice());
+        return discountAmount;
     }
 
-    public int getQuantity() {
+    public final int getQuantity() {
         return quantity;
     }
 

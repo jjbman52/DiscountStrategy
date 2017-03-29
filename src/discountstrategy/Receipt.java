@@ -2,26 +2,39 @@ package discountstrategy;
 
 public class Receipt {
     private DataAccessStrategy dataAccessStrategy;
+    private Store store;
     private Customer customer;
     private LineItem[] lineItems;
     private OutputStrategy output;
     
-    public Receipt(String customerId, DataAccessStrategy dataAccessStrategy) {
+    public Receipt(String storeId, String customerId, DataAccessStrategy dataAccessStrategy) {
         this.setDataAccessStrategy(dataAccessStrategy);
         lineItems = new LineItem[0];
+        this.store = findStore(storeId);
         this.customer = findCustomer(customerId);
     }
     
-    private Customer findCustomer(String customerId){
+    private final Store findStore(String storeId){
+        if(storeId == null || storeId.isEmpty()){
+            throw new IllegalArgumentException("Store ID is mandatory");
+        }
+        return dataAccessStrategy.findStore(storeId);
+    }
+    
+    private final Customer findCustomer(String customerId){
+        if(customerId ==  null || customerId.isEmpty()) {
+            throw new IllegalArgumentException("Customer Id is mandatory");
+        }
         return dataAccessStrategy.findCustomer(customerId);
     }
     
-    public final void addNewLineItem(String productId, int quantity){
+    public final LineItem addAndGetNewLineItem(final String productId, final int quantity){
         LineItem lineItem = new LineItem(productId, quantity, dataAccessStrategy);
         addToArray(lineItem);
+        return lineItem;
     }
     
-    private void addToArray(final LineItem lineItem) {
+    private final void addToArray(final LineItem lineItem) {
         // needs validation
         LineItem[] tempItems = new LineItem[lineItems.length + 1];
         System.arraycopy(lineItems, 0, tempItems, 0, lineItems.length);
@@ -38,15 +51,29 @@ public class Receipt {
         return total;
     }
 
-    public DataAccessStrategy getDataAccessStrategy() {
+    public final DataAccessStrategy getDataAccessStrategy() {
         return dataAccessStrategy;
     }
 
-    public void setDataAccessStrategy(DataAccessStrategy dataAccessStrategy) {
+    public final void setDataAccessStrategy(final DataAccessStrategy dataAccessStrategy) {
         if(dataAccessStrategy == null){
             throw new IllegalArgumentException("DataAccessStrategy is not valid.");
         }else{
             this.dataAccessStrategy = dataAccessStrategy;
         }
+    }
+    
+    private final String getColumnHeadings(){
+        String headings = "ID       Item               Price     Quantity     Discount";
+        return headings;
+    }
+    
+    public final String getReceipt(){
+        String data = "";
+        data += store.getName();
+        data += "Sold to: " + customer.getName();
+        data += "Sold to: " + ((customer.getName() == null) ? "" : customer.getName());
+        data += getColumnHeadings();
+        return data;
     }
 }
