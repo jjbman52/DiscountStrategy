@@ -16,7 +16,7 @@ public class PercentOffDiscount implements Discount{
         return percent;
     }
 
-    public final void setPercent(final double percent) {
+    public final void setPercent(final double percent)  throws MandatoryEntryException{
         if(percent < 0){
             throw new IllegalArgumentException("Input is not valid.");
         }else{

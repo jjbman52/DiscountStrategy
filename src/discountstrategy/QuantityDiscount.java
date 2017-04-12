@@ -11,7 +11,7 @@ public class QuantityDiscount implements Discount {
     }
     
     @Override
-    public final double calculateDiscount(int qty, double price) {
+    public final double calculateDiscount(int qty, double price) throws MandatoryEntryException{
         double discount = 0;
         if(qty >= minQty){
             discount = price * qty * percent;
@@ -23,7 +23,7 @@ public class QuantityDiscount implements Discount {
         return percent;
     }
 
-    public void setPercent(double percent) {
+    public void setPercent(double percent) throws MandatoryEntryException{
         if(percent < 0){
             throw new IllegalArgumentException("Input is not valid.");
         }else{

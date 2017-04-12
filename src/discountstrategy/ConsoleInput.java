@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class ConsoleInput implements InputStrategy {
     
     @Override
-    public final String getInput() {
+    public final String getInput() throws MandatoryEntryException{
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         

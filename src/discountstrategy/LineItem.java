@@ -26,7 +26,7 @@ public class LineItem {
         return product;
     }
 
-    public final void setProduct(Product product) {
+    public final void setProduct(Product product) throws MandatoryEntryException{
         if(product == null){
             throw new IllegalArgumentException("Product is not valid.");
         }else{
@@ -44,7 +44,7 @@ public class LineItem {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(int quantity) throws MandatoryEntryException{
         if(quantity < 0){
             throw new IllegalArgumentException("Input is not valid.");
         }else{

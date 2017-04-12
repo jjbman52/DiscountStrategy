@@ -5,7 +5,6 @@ public class Receipt {
     private Store store;
     private Customer customer;
     private LineItem[] lineItems;
-    private OutputStrategy output;
     
     public Receipt(String storeId, String customerId, DataAccessStrategy dataAccessStrategy) {
         this.setDataAccessStrategy(dataAccessStrategy);
@@ -14,14 +13,14 @@ public class Receipt {
         this.customer = findCustomer(customerId);
     }
     
-    private final Store findStore(String storeId){
+    private final Store findStore(String storeId) throws MandatoryEntryException{
         if(storeId == null || storeId.isEmpty()){
             throw new IllegalArgumentException("Store ID is mandatory");
         }
         return dataAccessStrategy.findStore(storeId);
     }
     
-    private final Customer findCustomer(String customerId){
+    private final Customer findCustomer(String customerId) throws MandatoryEntryException{
         if(customerId ==  null || customerId.isEmpty()) {
             throw new IllegalArgumentException("Customer Id is mandatory");
         }
@@ -55,7 +54,7 @@ public class Receipt {
         return dataAccessStrategy;
     }
 
-    public final void setDataAccessStrategy(final DataAccessStrategy dataAccessStrategy) {
+    public final void setDataAccessStrategy(final DataAccessStrategy dataAccessStrategy) throws MandatoryEntryException{
         if(dataAccessStrategy == null){
             throw new IllegalArgumentException("DataAccessStrategy is not valid.");
         }else{

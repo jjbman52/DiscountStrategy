@@ -22,7 +22,6 @@ public class PosSystem {
     }
 
     public final void endTransaction() {
-        output = new ConsoleOutput();
         output.produceOutput(receipt.getReceipt());
     }
 }

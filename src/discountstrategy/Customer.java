@@ -13,7 +13,7 @@ class Customer {
         return customerId;
     }
 
-    public final void setCustomerId(String customerId) {
+    public final void setCustomerId(String customerId) throws MandatoryEntryException{
         if(customerId == null || customerId.isEmpty() || customerId.length() < 2){
             throw new IllegalArgumentException("Input is not valid.");
         }else{
@@ -25,7 +25,7 @@ class Customer {
         return name;
     }
 
-    public final void setName(String name) {
+    public final void setName(String name) throws MandatoryEntryException{
         if(name == null || name.isEmpty() || name.length() < 2){
             throw new IllegalArgumentException("Input is not valid.");
         }else{

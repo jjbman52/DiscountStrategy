@@ -17,7 +17,7 @@ public class Product {
         return productId;
     }
 
-    public final void setProductId(String productId) {
+    public final void setProductId(String productId) throws MandatoryEntryException{
         if(productId == null || productId.isEmpty() || productId.length() < 2){
             throw new IllegalArgumentException("Input is not valid.");
         }else{
@@ -29,7 +29,7 @@ public class Product {
         return productName;
     }
 
-    public final void setProductName(String productName) {
+    public final void setProductName(String productName) throws MandatoryEntryException{
         if(productName == null || productName.isEmpty() || productName.length() < 2){
             throw new IllegalArgumentException("Input is not valid.");
         }else{
@@ -41,7 +41,7 @@ public class Product {
         return price;
     }
 
-    public final void setPrice(double price) {
+    public final void setPrice(double price) throws MandatoryEntryException{
         if(price < 0){
             throw new IllegalArgumentException("Input is not valid.");
         }else{
@@ -49,7 +49,7 @@ public class Product {
         }
     }
 
-    public final Discount getDiscount() {
+    public final Discount getDiscount() throws MandatoryEntryException{
         return discount;
     }
 
