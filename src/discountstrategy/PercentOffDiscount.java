@@ -9,7 +9,11 @@ public class PercentOffDiscount implements Discount{
 
     @Override
     public final double calculateDiscount(int qty, double price) {
-        return price * qty * percent;
+        if (qty < 0 || price < 0){
+            throw new IllegalArgumentException("Input is not valid.");
+        } else {
+            return price * qty * percent;
+        }
     }
 
     public final double getPercent() {

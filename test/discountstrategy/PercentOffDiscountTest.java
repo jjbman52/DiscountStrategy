@@ -9,6 +9,7 @@ import org.junit.BeforeClass;
 
 public class PercentOffDiscountTest {
     private PercentOffDiscount instance;
+    private double percent;
     
     public PercentOffDiscountTest() {
     }
@@ -28,26 +29,16 @@ public class PercentOffDiscountTest {
     
     @After
     public void tearDown() {
-        // clean up after yourself!
         instance = null;
     }
-
-    @Test
-    public void testGetPercent() {
-        
-    }
-
-    /**
-     * Test of setPercent method, of class PercentOffDiscount.
-     */
-    @Test
-    public void testSetPercent() {
-        System.out.println("setPercent");
-        double percent = 0.0;
-        PercentOffDiscount instance = null;
-        instance.setPercent(percent);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
     
+    @Test(expected = IllegalArgumentException.class)
+    public void testCalculateDiscountIfEitherPriceOrQuantityIsLessThan0() {
+        instance.calculateDiscount(-1, -1);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetPercentIfLessThan0() {
+        instance.setPercent(-1);
+    }
 }

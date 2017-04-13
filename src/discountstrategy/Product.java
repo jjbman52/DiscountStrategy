@@ -18,7 +18,7 @@ public class Product {
     }
 
     public final void setProductId(String productId) throws MandatoryEntryException{
-        if(productId == null || productId.isEmpty() || productId.length() < 2){
+        if(productId == null || productId.isEmpty()){
             throw new IllegalArgumentException("Input is not valid.");
         }else{
             this.productId = productId;
@@ -30,7 +30,7 @@ public class Product {
     }
 
     public final void setProductName(String productName) throws MandatoryEntryException{
-        if(productName == null || productName.isEmpty() || productName.length() < 2){
+        if(productName == null || productName.isEmpty()){
             throw new IllegalArgumentException("Input is not valid.");
         }else{
             this.productName = productName;
